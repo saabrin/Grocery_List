@@ -11,18 +11,24 @@ import {
 } from "react-native";
 import Grocery from "./src/Grocery";
 
+/*This function handles Hooks to create grocerys */
 export default function App() {
+  /*Hook to create grocerys */
   const [grocery, setGrocery] = useState();
+  /*Hook with an array to save the grocery list */
   const [groceryItem, setGroceryItem] = useState([]);
-  
 
+  /*Arrow function */
   const handleAddGrocery = () => {
-    /*tar bort keyborden när man lägger till en ny , på de mobila enheterna */
+    /*The keybord disappears when the grocery is added. */
     Keyboard.dismiss();
+    /*A function to add the new grocerys to the list. */
     setGroceryItem([...groceryItem, grocery]);
+    /*function to empty the textinput, after adding any grocerys to the list*/
     setGrocery("");
   };
 
+  /*Arrow function, with index as an argument */
   const deletGrocery = (index) => {
     let itemCopy = [...groceryItem];
     itemCopy.splice(index, 1);
@@ -32,20 +38,23 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.yourTasks}></View>
-      <Text style={styles.title}>🍉 Your grocery list 🍉 </Text>
+      <Text style={styles.title}>🍉 Your grocery list 🍉</Text>
       <View style={styles.items}>
         {groceryItem.map((item, index) => {
           return (
+            /*onPress with arrow function to remove the grocerys */
             <TouchableOpacity key={index} onPress={() => deletGrocery(index)}>
               <Grocery text={item} />
             </TouchableOpacity>
           );
         })}
       </View>
+      {/* conditional rendering, diffrent behaviors for IOS and Android. */}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.textWrapper}
       >
+        {/* textinput with a place holder to let the user type in thier grocerys, and add to the list */}
         <TextInput
           style={styles.input}
           placeholder={"Type in your grocery here"}
@@ -53,7 +62,7 @@ export default function App() {
           value={grocery}
           onChangeText={(text) => setGrocery(text)}
         />
-
+        {/* A button to add the grocerys */}
         <TouchableOpacity onPress={() => handleAddGrocery()}>
           <View style={styles.addWrapper}>
             <Text style={styles.add}>☝️</Text>

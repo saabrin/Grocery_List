@@ -1,12 +1,9 @@
+/* Costum component */
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+/* arrow function with props as an argument  */
 const Grocery = (props) => {
+  /* Return function to allow the inpiut text to be visble. */
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
